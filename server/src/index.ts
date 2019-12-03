@@ -7,7 +7,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.APPLICATION_PORT || 8081;
 
-app.use(router);
+app.use("/api", router);
 
 app.listen(PORT, () => {
     // tslint:disable-next-line:no-console
