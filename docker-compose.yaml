@@ -1,9 +1,12 @@
-version: '2'
+version: '3'
 services:
   nginx:
     image: nginx:1.15.3
     container_name: nginx
     links:
+      - server
+    depends_on:
+      - client
       - server
     ports:
       - "80:80"
@@ -17,6 +20,7 @@ services:
     container_name: client
     volumes:
       - ./client:/app
+      - /app/node_modules
     working_dir: /app
     ports:
       - "8080:8080"
@@ -24,11 +28,23 @@ services:
   server:
     build: ./server
     container_name: server
+    depends_on:
+      - database
     environment:
       - NODE_ENV=production
       - APPLICATION_PORT=8081
+      - DATABASE_URL=database
     volumes:
       - ./server:/app
+      - /app/node_modules
     working_dir: /app
     ports:
       - "8081:8081"
+
+  database:
+    image: mongo
+    container_name: database
+    ports:
+      - 27017:27017
+    volumes:
+      - ./database:/app/database
