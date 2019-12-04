@@ -3,22 +3,22 @@ import { Request, Response, Router  } from "express";
 const router = Router();
 
 // Users retreival end-point
-router.get("/users", (request: Request, response: Response) => {
+router.get("/people", (request: Request, response: Response) => {
 
 });
 
 // User creation end-point
-router.post("/users", (request: Request, response: Response) => {
+router.post("/people", (request: Request, response: Response) => {
 
 });
 
 // User update end-point
-router.put("/users/:id", (request: Request, response: Response) => {
+router.put("/people/:id", (request: Request, response: Response) => {
 
 });
 
 // User delete end-point
-router.delete("/users/:id", (request: Request, response: Response) => {
+router.delete("/people/:id", (request: Request, response: Response) => {
 
 });
 
