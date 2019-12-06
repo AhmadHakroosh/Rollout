@@ -1,18 +1,18 @@
-import mongoose from 'mongoose';
+import { Model, model, Schema } from "mongoose";
+import { IPerson } from "../interfaces/person.interface";
 
-const schema = new mongoose.Schema({
+const schema = new Schema({
     firstname: {
-        type: String,
         required: true,
-        trim: true
+        trim: true,
+        type: String
     },
-    
+
     lastname: {
-        type: String,
         required: true,
-        trim: true
+        trim: true,
+        type: String
     }
 });
 
-const Person = mongoose.model('person', schema);
-export default Person;
+export const Person: Model<IPerson> = model("person", schema);
