@@ -2,10 +2,6 @@ import mongoose from "mongoose";
 
 class DataSource {
 
-    private connector: string;
-    private host: string;
-    private port: string;
-    private database: string;
     private connectionString: string;
 
     constructor(connector: string, host: string, port: string, database: string) {

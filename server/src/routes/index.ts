@@ -3,22 +3,16 @@ import { People } from "../controllers/people.controller";
 
 const router = Router();
 
-// Users retreival end-point
-router.get("/people", People.getAll);
+// People retrieval end-point
+router.get("/people", People.retrieve);
 
-// User creation end-point
-router.post("/people", (request: Request, response: Response) => {
-    response.send("Hello world!");
-});
+// Person creation end-point
+router.post("/people", People.create);
 
-// User update end-point
-router.put("/people/:id", (request: Request, response: Response) => {
-    response.send("Hello world!");
-});
+// Person update end-point
+router.patch("/people/:id", People.update);
 
-// User delete end-point
-router.delete("/people/:id", (request: Request, response: Response) => {
-    response.send("Hello world!");
-});
+// Person deletion end-point
+router.delete("/people/:id", People.delete);
 
 export default router;
