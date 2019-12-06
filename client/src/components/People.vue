@@ -1,5 +1,6 @@
 <template>
     <div class="people">
+        <p v-if="empty">Hello there, you have no people yet, add some if you like</p>
         <table class="people-list">
             <tr>
                 <td><input type="text" placeholder="First + Last name" v-model="fullname"></td>
@@ -34,6 +35,10 @@ export default class People extends Vue {
 
     get clickable(): boolean {
         return this.fullname !== "";
+    }
+
+    get empty(): boolean {
+        return this.people.length === 0;
     }
 
     get() {
@@ -79,18 +84,7 @@ export default class People extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-h3 {
-    margin: 40px 0 0;
-}
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-li {
-    display: inline-block;
-    margin: 0 10px;
-}
-a {
-    color: #42b983;
+.people-list {
+    margin: auto;
 }
 </style>
