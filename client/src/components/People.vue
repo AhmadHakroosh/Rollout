@@ -39,11 +39,12 @@ export default class People extends Vue {
     get() {
         this.$http.get("people").then(({ data } : { data: IPerson[] }) => {
             this.people = data;
+
         });
     }
 
     add() {
-        let [firstname, lastname] = this.fullname.match(/\w+/g) || [];
+        let [firstname, lastname] = this.fullname.match(/\w+/g) || [null, null];
         this.$http.post("people", {
             firstname: firstname,
             lastname: lastname

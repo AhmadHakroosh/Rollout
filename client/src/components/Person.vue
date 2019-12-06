@@ -25,13 +25,7 @@ import { IPerson } from "../interfaces/person.interface";
 })
 export default class Person extends Vue {
 
-    @Prop({
-        default: {
-            _id: '',
-            firstname: '',
-            lastname: ''
-        }
-    }) who: IPerson;
+    @Prop() who!: IPerson;
 
     private editable: boolean = false;
     private draft: IPerson = Object.assign({}, this.who);
