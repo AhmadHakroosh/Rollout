@@ -1,5 +1,5 @@
-import { Model, model, Schema } from 'mongoose';
-import { IPerson } from '../interfaces/person.interface';
+import { Model, model, Schema } from "mongoose";
+import { IPerson } from "../interfaces/person.interface";
 
 const schema = new Schema({
     firstname: {
@@ -15,4 +15,4 @@ const schema = new Schema({
     }
 });
 
-export const Person: Model<IPerson> = model('person', schema);
+export const Person: Model<IPerson> = model("person", schema);

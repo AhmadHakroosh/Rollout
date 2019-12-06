@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
-import { Model } from 'mongoose';
-import { IPerson } from '../interfaces/person.interface';
-import { Person } from '../models/person.model';
+import { Request, Response } from "express";
+import { Model } from "mongoose";
+import { IPerson } from "../interfaces/person.interface";
+import { Person } from "../models/person.model";
 
 class PeopleController {
 

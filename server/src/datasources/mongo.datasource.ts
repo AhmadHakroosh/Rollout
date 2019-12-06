@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 class DataSource {
 
@@ -9,7 +9,7 @@ class DataSource {
     }
 
     public connect(): Promise<typeof mongoose> {
-        return mongoose.connect(this.connectionString);
+        return mongoose.connect(this.connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
     }
 
 }
