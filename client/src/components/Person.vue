@@ -1,9 +1,14 @@
 <template>
-    <tr class="person">
+    <tr v-if="!editable" class="person">
         <td class="person-detail">{{ who.firstname | lower | capitalize }}</td>
         <td class="person-detail">{{ who.lastname | trim | capitalize }}</td>
-        <td><button>Edit</button></td>
+        <td><button @click="edit">Edit</button></td>
         <td><button @click="remove">Remove</button></td>
+    </tr>
+    <tr v-else>
+        <td><input type="text" v-model="draft.firstname"></td>
+        <td><input type="text" v-model="draft.lastname"></td>
+        <td><button @click="save">Save</button></td>
     </tr>
 </template>
 
@@ -28,13 +33,24 @@ export default class Person extends Vue {
         }
     }) who: IPerson;
 
+    private editable: boolean = false;
+    private draft: IPerson = Object.assign({}, this.who);
+
     constructor() {
         super();
     }
 
-    // @Emit()
+    edit(): void {
+        this.editable = true;
+    }
+
     remove(): void {
         this.$emit('remove', this.who._id);
+    }
+
+    save(): void {
+        this.$emit('update', this.draft);
+        this.editable = false;
     }
 }
 </script>

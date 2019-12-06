@@ -5,7 +5,12 @@
                 <td><input type="text" placeholder="First + Last name" v-model="fullname"></td>
                 <td><button @click="add" :disabled="!clickable">Add</button></td>
             </tr>
-            <Person v-for="person in people" :key="person._id" :who="person" @remove="remove" />
+            <Person v-for="person in people"
+                :key="person._id"
+                :who="person"
+                @remove="remove"
+                @update="update"
+                />
         </table>
     </div>
 </template>
@@ -54,6 +59,19 @@ export default class People extends Vue {
                 this.people.splice(position, 1);
             }
         });
+    }
+
+    update(person: IPerson): void {
+        const current = this.people.find((someone: IPerson): boolean => someone._id === person._id);
+        if(current && JSON.stringify(current) !== JSON.stringify(person)) {
+            this.$http.patch(`people/${person._id}`, {
+                firstname: person.firstname,
+                lastname: person.lastname
+            }).then(({ data } : { data: IPerson }) => {
+                const position = this.people.findIndex((person: IPerson): boolean => person._id === data._id);
+                this.people.splice(position, 1, data);
+            });
+        }
     }
 }
 </script>
