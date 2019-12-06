@@ -3,12 +3,12 @@
         <td class="person-detail">{{ who.firstname | lower | capitalize }}</td>
         <td class="person-detail">{{ who.lastname | trim | capitalize }}</td>
         <td><button>Edit</button></td>
-        <td><button>Remove</button></td>
+        <td><button @click="remove">Remove</button></td>
     </tr>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue, Emit } from "vue-property-decorator";
 import { IPerson } from "../interfaces/person.interface";
 
 @Component({
@@ -30,6 +30,11 @@ export default class Person extends Vue {
 
     constructor() {
         super();
+    }
+
+    // @Emit()
+    remove(): void {
+        this.$emit('remove', this.who._id);
     }
 }
 </script>

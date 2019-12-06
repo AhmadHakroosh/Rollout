@@ -1,7 +1,11 @@
 <template>
     <div class="people">
         <table class="people-list">
-            <Person v-for="person in people" :key="person._id" :who="person" />
+            <tr>
+                <td><input type="text" placeholder="First + Last name" v-model="fullname"></td>
+                <td><button @click="add" :disabled="!clickable">Add</button></td>
+            </tr>
+            <Person v-for="person in people" :key="person._id" :who="person" @remove="remove" />
         </table>
     </div>
 </template>
@@ -15,16 +19,40 @@ import { IPerson } from "../interfaces/person.interface";
     components: { Person }
 })
 export default class People extends Vue {
-    people: Object[] = [];
+    private people: IPerson[] = [];
+    private fullname: String = "";
 
     constructor() {
         super();
-        this.getPeople();
+        this.get();
     }
 
-    getPeople() {
-        this.$http.get("/people").then(({ data }: { data: IPerson[] }) => {
+    get clickable(): boolean {
+        return this.fullname !== "";
+    }
+
+    get() {
+        this.$http.get("people").then(({ data } : { data: IPerson[] }) => {
             this.people = data;
+        });
+    }
+
+    add() {
+        let [firstname, lastname] = this.fullname.match(/\w+/g) || [];
+        this.$http.post("people", {
+            firstname: firstname,
+            lastname: lastname
+        }).then(({ data } : { data: IPerson }) => {
+            this.people.push(data);
+        });
+    }
+
+    remove(id: String): void {
+        this.$http.delete(`people/${id}`).then(({ data } : { data: IPerson }) => {
+            const position = this.people.findIndex((person: IPerson): boolean => person._id === data._id);
+            if(position !== -1) {
+                this.people.splice(position, 1);
+            }
         });
     }
 }
