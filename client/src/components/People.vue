@@ -43,7 +43,9 @@ export default class People extends Vue {
   }
 
   get clickable(): boolean {
-    return this.fullname !== "";
+    return (
+      this.fullname !== "" && (this.fullname.match(/\w+/g) || []).length >= 2
+    );
   }
 
   get empty(): boolean {
