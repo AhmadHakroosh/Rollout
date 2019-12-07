@@ -65,6 +65,7 @@ export default class People extends Vue {
       })
       .then(({ data }: { data: IPerson }) => {
         this.people.push(data);
+        this.fullname = "";
       });
   }
 
