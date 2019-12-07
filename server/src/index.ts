@@ -36,14 +36,9 @@ const people = [
   { firstname: "Elad", lastname: "Cohen" }
 ];
 
-Person.insertMany(people, (error: Error, people: IPerson[]) => {
-  if (error) {
-    // tslint:disable-next-line:no-console
-    console.log(error);
-  } else {
-    // tslint:disable-next-line:no-console
-    console.log("Database is filled with sample data");
-  }
+Person.insertMany(people, (error: Error) => {
+  // tslint:disable-next-line:no-console
+  console.log((error || "Database is filled with sample data"));
 });
 
 app.use(bodyParser.json());
