@@ -2,7 +2,6 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import express from "express";
 import DataSource from "./datasources/mongo.datasource";
-import { IPerson } from "./interfaces/person.interface";
 import { Person } from "./models/person.model";
 import router from "./routes";
 
